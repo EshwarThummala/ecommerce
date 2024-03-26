@@ -4,6 +4,7 @@ import { getAllProducts } from "../API/api";
 import Navigation from "./Navigation";
 import Cart from "./Cart";
 import ShopHome from "./ShopHome";
+import Category from "./Category";
 
 
 const Shop = ({ setShop }) => {
@@ -20,11 +21,14 @@ const Shop = ({ setShop }) => {
     case "SHOP":
       content = <ShopHome dispatch={dispatch}/>
       break
+    case "CATEGORY":
+      content = <Category dispatch={dispatch}/>
+      break
     default:
       content = <ShopHome dispatch={dispatch}/>
   }
   return (
-    <Navigation setShop={setShop} setNavState={setNavState}>
+    <Navigation setShop={setShop} setNavState={setNavState} navState={navState}>
       <div style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 70 }}>
         {content}
       </div>
