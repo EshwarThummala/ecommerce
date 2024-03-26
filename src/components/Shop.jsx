@@ -1,33 +1,31 @@
-import { useEffect } from "react";
-import { storeHomeProductsAction } from "../redux/actions/productsActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { getAllProducts } from "../API/api";
-import Product from "./Product";
-import { Row, Col, Container } from "react-bootstrap";
+import Navigation from "./Navigation";
+import Cart from "./Cart";
+import ShopHome from "./ShopHome";
+
 
 const Shop = ({ setShop }) => {
   const dispatch = useDispatch();
+  const [ navState, setNavState ] = useState();
   useEffect(() => {
     getAllProducts("12", dispatch);
   }, []);
-  const homeProducts = useSelector((state) => state.productStore.products);
+  let content = null;
+  switch (navState) {
+    case "CART":
+      content = <Cart dispatch={dispatch} />
+      break
+    default:
+      content = <ShopHome dispatch={dispatch}/>
+  }
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Shop Page</h1>
-      <button onClick={() => setShop(false)}>Go to Home</button>
-      {homeProducts.length == 0 ? (
-        <p>Loading Data</p>
-      ) : (
-        <Row style={{ marginTop: 10 }}>
-          {homeProducts.map((product) => (
-            <Col lg={2} md={8} xs={12} style={{ marginTop: 20 }}>
-              <Product key={product.id} product={product} dispatch={dispatch} />
-            </Col>
-          ))}
-        </Row>
-      )}
-    </div>
+    <Navigation setShop={setShop} setNavState={setNavState}>
+      <div style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 70 }}>
+        {content}
+      </div>
+    </Navigation>
   );
 };
-
 export default Shop;
