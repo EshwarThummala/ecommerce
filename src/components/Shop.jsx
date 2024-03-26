@@ -8,7 +8,7 @@ import { Row, Col, Container } from "react-bootstrap";
 const Shop = ({ setShop }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    getAllProducts("50", dispatch);
+    getAllProducts("12", dispatch);
   }, []);
   const homeProducts = useSelector((state) => state.productStore.products);
   return (
@@ -20,7 +20,7 @@ const Shop = ({ setShop }) => {
       ) : (
         <Row style={{ marginTop: 10 }}>
           {homeProducts.map((product) => (
-            <Col lg={3} md={8} xs={12} style={{ marginTop: 20 }}>
+            <Col lg={2} md={8} xs={12} style={{ marginTop: 20 }}>
               <Product key={product.id} product={product} dispatch={dispatch} />
             </Col>
           ))}
