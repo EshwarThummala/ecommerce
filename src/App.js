@@ -1,15 +1,20 @@
-import logo from './logo.svg';
+import "bootstrap/dist/css/bootstrap.css";
+/*import "mdb-react-ui-kit/dist/css/mdb.min.css";*/
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import './App.css';
-import { useEffect } from 'react';
-import { getAllProducts, getProductByCategory } from './API/api';
+import { useState } from 'react';
 import Home from './components/Home';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import Shop from './components/Shop';
 
 function App() {
+  const [ shop, setShop ] = useState(false)
   return (
     <Provider store={store}>
-      <Home />
+      { 
+      !shop ? <Home setShop={setShop}/> : <Shop setShop={setShop}/>
+      }
     </Provider>
   );
 }
