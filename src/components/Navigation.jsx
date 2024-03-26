@@ -21,6 +21,11 @@ const Navigation = ({ children, setShop, setNavState }) => {
               <MDBIcon icon="home" style={{ color: "white" }} />
               </MDBNavbarLink>
             </MDBNavbarItem>
+            <MDBNavbarItem onClick={() => setNavState("HOME")}>
+              <MDBNavbarLink style={{ marginLeft:100, color: "white", cursor: "pointer" }}>
+                SHOP
+              </MDBNavbarLink>
+            </MDBNavbarItem>
             <MDBNavbarItem className="ms-auto" onClick={() => setNavState("CART")}>
               <MDBNavbarLink>
                 <MDBBadge pill color="danger">

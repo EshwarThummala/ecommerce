@@ -17,6 +17,9 @@ const Shop = ({ setShop }) => {
     case "CART":
       content = <Cart dispatch={dispatch} />
       break
+    case "SHOP":
+      content = <ShopHome dispatch={dispatch}/>
+      break
     default:
       content = <ShopHome dispatch={dispatch}/>
   }

@@ -10,6 +10,7 @@ import {
   MDBCardImage,
   MDBBtn,
   MDBRipple,
+  MDBCardFooter
 } from "mdb-react-ui-kit";
 import { useSelector } from "react-redux";
 
@@ -28,12 +29,12 @@ const Product = ({ product, dispatch }) => {
 
   const discountPrice = (product.price - (product.price*(product.discountPercentage/100))).toFixed(1)
   return (
-    <MDBCard>
+    <MDBCard className='h-100'>
       <MDBRipple
         rippleColor="light"
         rippleTag="div"
         className="bg-image hover-overlay"
-        style={{ height: "200px", objectFit: "cover" }}
+        
       >
         <MDBCardImage src={product.thumbnail} fluid alt="..." />
         <a>
@@ -65,9 +66,9 @@ const Product = ({ product, dispatch }) => {
         <MDBCardTitle>{product?.title}</MDBCardTitle>
         <MDBCardText>{product?.description}</MDBCardText>
       </MDBCardBody>
-      <MDBCardBody>
+      <MDBCardFooter>
         {inCart.length === 0 ? (
-          <MDBBtn onClick={handleAddToCart}>
+          <MDBBtn onClick={handleAddToCart} style={{ width: "100%" }}>
             <i
               className="fa-solid fa-cart-shopping"
               style={{ marginRight: "5px" }}
@@ -75,11 +76,11 @@ const Product = ({ product, dispatch }) => {
             ADD TO CART
           </MDBBtn>
         ) : (
-          <MDBBtn onClick={handleRemoveFromCart} color="danger">
+          <MDBBtn onClick={handleRemoveFromCart} color="danger" style={{ width: "100%" }}>
             REMOVE FROM CART
           </MDBBtn>
         )}
-      </MDBCardBody>
+      </MDBCardFooter>
     </MDBCard>
   );
 };
