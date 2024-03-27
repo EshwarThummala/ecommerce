@@ -12,9 +12,14 @@ import {
   MDBRipple,
   MDBCardFooter
 } from "mdb-react-ui-kit";
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import ProductModal from "./ProductModal";
 
 const Product = ({ product, dispatch }) => {
+
+  const [ showModal, setShowModal ] = useState(false)
+
   const handleAddToCart = () => {
     dispatch(addToCartAction(product));
   };
@@ -29,6 +34,8 @@ const Product = ({ product, dispatch }) => {
 
   const discountPrice = (product.price - (product.price*(product.discountPercentage/100))).toFixed(1)
   return (
+    <>
+    <ProductModal showModal={showModal} setShowModal={setShowModal} product={product}/>
     <MDBCard className='h-100'>
       <MDBRipple
         rippleColor="light"
@@ -65,6 +72,9 @@ const Product = ({ product, dispatch }) => {
         )}
         <MDBCardTitle>{product?.title}</MDBCardTitle>
         <MDBCardText>{product?.description}</MDBCardText>
+        <MDBBtn onClick={() => setShowModal(true)} color="info" >
+            MORE DETAILS
+          </MDBBtn>
       </MDBCardBody>
       <MDBCardFooter>
         {inCart.length === 0 ? (
@@ -82,6 +92,7 @@ const Product = ({ product, dispatch }) => {
         )}
       </MDBCardFooter>
     </MDBCard>
+    </>
   );
 };
 

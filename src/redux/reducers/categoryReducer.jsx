@@ -1,6 +1,7 @@
 const initialState = {
   categories: [],
   itemsBasedOnCategory: {},
+  currentCategory : ''
 };
 
 const categoryReducer = (state = initialState, action) => {
@@ -17,6 +18,11 @@ const categoryReducer = (state = initialState, action) => {
           ...state.itemsBasedOnCategory,
           [action.category]: action.payload,
         },
+      }
+    case "SET_CATEGORY":
+      return {
+        ...state,
+        currentCategory : action.payload
       }
     default:
         return state

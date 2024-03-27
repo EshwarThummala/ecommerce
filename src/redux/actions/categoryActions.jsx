@@ -12,3 +12,10 @@ export const updateCategoriesAction = (category, data) => {
         payload: data
     }
 }
+
+export const setCategoryAction = (data) => {
+    return {
+        type: "SET_CATEGORY",
+        payload: data
+    }
+}

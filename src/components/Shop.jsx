@@ -4,7 +4,7 @@ import { getAllProducts } from "../API/api";
 import Navigation from "./Navigation";
 import Cart from "./Cart";
 import ShopHome from "./ShopHome";
-import Category from "./Category";
+import Categories from "./Categories";
 
 
 const Shop = ({ setShop }) => {
@@ -22,7 +22,7 @@ const Shop = ({ setShop }) => {
       content = <ShopHome dispatch={dispatch}/>
       break
     case "CATEGORY":
-      content = <Category dispatch={dispatch}/>
+      content = <Categories dispatch={dispatch}/>
       break
     default:
       content = <ShopHome dispatch={dispatch}/>
