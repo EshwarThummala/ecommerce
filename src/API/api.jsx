@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { storeHomeProductsAction } from '../redux/actions/productsActions';
+import { storeHomeProductsAction, updateSearchItemResultsAction } from '../redux/actions/productsActions';
 import { addCategoriesAction, updateCategoriesAction } from '../redux/actions/categoryActions';
 
 export const getAllProducts = async (limit, dispatch) => {
@@ -28,6 +28,16 @@ export const getCategories = async (dispatch) => {
         dispatch(addCategoriesAction(response.data))
     }
     catch(error){
-        console.log("Error occured in getProductByCategory")
+        console.log("Error occured in getCategories")
+    }
+}
+
+export const getProductsBySearch = async (dispatch, keyword) => {
+    try{
+        const response = await axios.get(`https://dummyjson.com/products/search?q=${keyword}`)
+        dispatch(updateSearchItemResultsAction(response.data.products))
+    }
+    catch(error){
+        console.log("Error occured in getProductsBySearch")
     }
 }

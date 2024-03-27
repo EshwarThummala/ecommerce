@@ -9,9 +9,9 @@ import Categories from "./Categories";
 
 const Shop = ({ setShop }) => {
   const dispatch = useDispatch();
-  const [ navState, setNavState ] = useState();
+  const [ navState, setNavState ] = useState("SHOP");
   useEffect(() => {
-    getAllProducts("12", dispatch);
+    getAllProducts("100", dispatch);
   }, []);
   let content = null;
   switch (navState) {
@@ -28,7 +28,7 @@ const Shop = ({ setShop }) => {
       content = <ShopHome dispatch={dispatch}/>
   }
   return (
-    <Navigation setShop={setShop} setNavState={setNavState} navState={navState}>
+    <Navigation setShop={setShop} setNavState={setNavState} navState={navState} dispatch={dispatch}>
       <div style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 70 }}>
         {content}
       </div>
