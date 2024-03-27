@@ -6,22 +6,91 @@ import {
   MDBCardHeader,
   MDBListGroup,
   MDBListGroupItem,
+  MDBInputGroup,
+  MDBBtn,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalBody,
+  MDBBadge,
+  MDBModalFooter,
 } from "mdb-react-ui-kit";
+import { useState } from "react";
+import {
+  emptyCartAction,
+  updateQuantityAction,
+} from "../redux/actions/cartActions";
 
 const Cart = ({ dispatch }) => {
   const cartItems = useSelector((state) => state.cartItems);
-  const isEmpty = cartItems.length == 0;
+  const isEmpty = cartItems.length === 0;
   const totalPrice = cartItems.reduce(
-    (accumulator, item) => accumulator + item.price,
+    (accumulator, item) => accumulator + item.price * item.quantity,
     0
   );
-  const totalDiscountedPrice = (cartItems.reduce(
-    (accumulator, item) =>
-      accumulator + (item.price - item.price * (item.discountPercentage / 100)),
-    0
-  )).toFixed(1);
+  const totalDiscountedPrice = cartItems
+    .reduce(
+      (accumulator, item) =>
+        accumulator +
+        (item.price - item.price * (item.discountPercentage / 100)) *
+          item.quantity,
+      0
+    )
+    .toFixed(1);
+  const [modal, setModal] = useState(false);
+  const toggleOpen = () => setModal(!modal);
   return (
     <>
+      <MDBModal
+        animationDirection="top"
+        open={modal}
+        tabIndex="-1"
+        setOpen={setModal}
+      >
+        <MDBModalDialog position="top" frame>
+          <MDBModalContent>
+            <MDBModalBody>
+              <div className=" justify-content-center align-items-center">
+                <p className="mb-0">Your order below has been placed!!</p>
+                <MDBListGroup dark style={{ margin: "10px" }}>
+                  {cartItems.map((item) => {
+                    return (
+                      <MDBListGroupItem>
+                        <Row>
+                          <Col lg={7}>{item.title}</Col>
+                          <Col lg={2}>
+                            <MDBBadge pill light>
+                              {item.quantity}
+                            </MDBBadge>
+                          </Col>
+                          <Col lg={3}>{item.price * item.quantity}</Col>
+                        </Row>
+                      </MDBListGroupItem>
+                    );
+                  })}
+                </MDBListGroup>
+              </div>
+            </MDBModalBody>
+            <MDBModalFooter
+              style={{ backgroundColor: "#9acf9b", color: "white" }}
+              className="d-flex justify-content-between"
+            >
+              <MDBBtn
+                color="success"
+                size="sm"
+                className="ms-2"
+                onClick={() => {
+                  toggleOpen();
+                  dispatch(emptyCartAction())
+                }}
+              >
+                Ok, thanks
+              </MDBBtn>
+              <p>Total price is ${totalDiscountedPrice}</p>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
       {isEmpty ? (
         <h1>Empty Cart!! Go and shop something...</h1>
       ) : (
@@ -41,25 +110,47 @@ const Cart = ({ dispatch }) => {
           </Col>
           <Col>
             <MDBCard>
-              <MDBCardHeader>Cost</MDBCardHeader>
+              <MDBCardHeader>
+                <Row>
+                  <Col lg={7}>Cost</Col>
+                  <Col lg={2}>Actual</Col>
+                  <Col lg={3}>Discounted</Col>
+                </Row>
+              </MDBCardHeader>
               <MDBListGroup flush>
                 {cartItems.map((item) => {
                   return (
                     <MDBListGroupItem>
                       <Row>
-                        <Col lg={8}>
+                        <Col lg={4}>
                           <span>{item.title}</span>
                         </Col>
+                        <Col lg={3}>
+                          <MDBInputGroup className="mb-3" size="sm">
+                            <input
+                              className="form-control"
+                              type="number"
+                              value={item.quantity}
+                              min="1"
+                              onChange={(e) =>
+                                dispatch(
+                                  updateQuantityAction(item.id, e.target.value)
+                                )
+                              }
+                            />
+                          </MDBInputGroup>
+                        </Col>
                         <Col lg={2}>
-                          <span style={{ color: "red" }}>
-                            {"$" + item?.price}
+                          <span style={{ color: "#db5c5c" }}>
+                            {"$" + item?.price * item.quantity}
                           </span>
                         </Col>
-                        <Col lg={2} style={{ color: "green" }}>
+                        <Col lg={3} style={{ color: "#45d076" }}>
                           {"$" +
                             (
-                              item.price -
-                              item.price * (item.discountPercentage / 100)
+                              (item.price -
+                                item.price * (item.discountPercentage / 100)) *
+                              item.quantity
                             ).toFixed(1)}
                         </Col>
                       </Row>
@@ -68,24 +159,33 @@ const Cart = ({ dispatch }) => {
                 })}
                 <MDBListGroupItem color="dark">
                   <Row>
-                    <Col lg={8}>
+                    <Col lg={7}>
                       <span>Total</span>
                     </Col>
                     <Col lg={2}>
-                      <span style={{ color: "red" }}>{"$" + totalPrice}</span>
+                      <span style={{ color: "#db5c5c" }}>
+                        {"$" + totalPrice}
+                      </span>
                     </Col>
-                    <Col lg={2}>
-                      <span style={{ color: "green" }}>
+                    <Col lg={3}>
+                      <span style={{ color: "#45d076" }}>
                         {"$" + totalDiscountedPrice}
                       </span>
                     </Col>
                   </Row>
                 </MDBListGroupItem>
                 <MDBListGroupItem color="success">
-                  Hurray!! You saved ${(totalPrice-totalDiscountedPrice).toFixed(1)}
+                  Hurray!! You saved $
+                  {(totalPrice - totalDiscountedPrice).toFixed(1)}
                 </MDBListGroupItem>
               </MDBListGroup>
             </MDBCard>
+            <MDBBtn
+              style={{ marginLeft: "200px", marginTop: "20px" }}
+              onClick={toggleOpen}
+            >
+              Confirm Order
+            </MDBBtn>
           </Col>
         </Row>
       )}

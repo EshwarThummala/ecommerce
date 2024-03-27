@@ -11,3 +11,17 @@ export const removeFromCartAction = (data) => {
         payload: data
     }
 }
+
+export const updateQuantityAction = (id, data) => {
+    return {
+        type: "UPDATE_QUANTITY",
+        id: id,
+        payload: data
+    }
+}
+
+export const emptyCartAction = () => {
+    return {
+        type: "EMPTY_CART",
+    }
+}
