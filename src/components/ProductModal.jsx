@@ -41,35 +41,64 @@ const ProductModal = ({ showModal, setShowModal, product }) => {
             <MDBListGroup dark style={{ margin: "5px" }}>
               <MDBListGroupItem>
                 <Row>
-                  <Col><b>Product Id : </b>{product.id}</Col>
-                  <Col><b>Rating : </b>{product.rating}</Col>
+                  <Col lg={4}>
+                    <b>Product Id : </b>
+                    {product.id}
+                  </Col>
+                  <Col>
+                    <b>Rating : </b>
+                    <span style={{marginRight: "10px"}}>{product.rating}</span>
+                    {Array(Math.round(product.rating))
+                      .fill()
+                      .map(() => (
+                        <i
+                          style={{ margin: "2px" }}
+                          className="fa-solid fa-star"
+                        />
+                      ))}
+                  </Col>
                 </Row>
               </MDBListGroupItem>
               <MDBListGroupItem>
                 <Row>
-                  <Col><b>Name : </b>{product.title}</Col>
-                  <Col><b>Brand : </b>{product.brand}</Col>
+                  <Col>
+                    <b>Name : </b>
+                    {product.title}
+                  </Col>
+                  <Col>
+                    <b>Brand : </b>
+                    {product.brand}
+                  </Col>
                 </Row>
               </MDBListGroupItem>
               <MDBListGroupItem>
                 <Row>
                   <Col lg={6}>
-                    <b>Price : </b>
-                    {(product.price -
-                        product.price *
-                          (product.discountPercentage / 100).toFixed(1))}
+                    <b>Price : $</b>
+                    {product.price -
+                      product.price *
+                        (product.discountPercentage / 100).toFixed(1)}
                   </Col>
-                  <Col><b>Stock : </b>{product.stock}</Col>
+                  <Col>
+                    <b>Stock : </b>
+                    {product.stock}
+                  </Col>
                 </Row>
               </MDBListGroupItem>
               <MDBListGroupItem>
                 <Row>
-                  <Col><b>Description : </b>{product.description}</Col>
+                  <Col>
+                    <b>Description : </b>
+                    {product.description}
+                  </Col>
                 </Row>
               </MDBListGroupItem>
               <MDBListGroupItem>
                 <Row>
-                  <Col><b>Category : </b>{product.category}</Col>
+                  <Col>
+                    <b>Category : </b>
+                    {product.category}
+                  </Col>
                 </Row>
               </MDBListGroupItem>
             </MDBListGroup>

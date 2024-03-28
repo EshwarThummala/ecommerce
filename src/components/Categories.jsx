@@ -39,6 +39,7 @@ const Categories = ({ dispatch }) => {
               return (
                 <MDBDropdownItem
                   link
+                  key={category}
                   onClick={() => dispatch(setCategoryAction(category))}
                   aria-current={selectedCategory === category}
                 >

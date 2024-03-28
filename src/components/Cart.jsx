@@ -125,7 +125,8 @@ const Cart = ({ dispatch }) => {
             <MDBCard>
               <MDBCardHeader>
                 <Row>
-                  <Col lg={7}>Cost</Col>
+                  <Col lg={4}>Cost</Col>
+                  <Col lg={3}>Quantity</Col>
                   <Col lg={2}>Actual</Col>
                   <Col lg={3}>Discounted</Col>
                 </Row>

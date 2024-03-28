@@ -26,7 +26,13 @@ const ShopHome = ({ dispatch }) => {
             </Col>
           ))
         ) : searchResults.length === 0 ? (
-          <h1>No Results</h1>
+          <div
+          className="alert alert-light"
+          role="alert"
+          style={{ textAlign: "center", marginTop: "100px" }}
+        >
+          Opps, No search results for the product : {searchItem}
+        </div>
         ) : (
           <>
             <h1>{searchResults.length} Results</h1>
