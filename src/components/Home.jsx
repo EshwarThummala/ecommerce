@@ -35,9 +35,16 @@ const Home = ({ setShop }) => {
             <div className="text-white" data-mdb-theme="dark">
               <h1 className="mb-3">Welcome to shopping center</h1>
               <p>When in doubt, go shopping</p>
-              <MDBBtn outline className="mx-2" style={{color: "white"}} color="secondary" onClick={() => setShop(true)}>
+              <MDBBtn
+                outline
+                className="mx-2"
+                style={{ color: "white", marginBottom: "20px" }}
+                color="secondary"
+                onClick={() => setShop(true)}
+              >
                 Go TO SHOP
               </MDBBtn>
+              <p><i><b>Designed by Eshwar Reddy Thummala</b></i></p>
             </div>
           </div>
         </div>
