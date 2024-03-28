@@ -1,5 +1,5 @@
 # Ecommerce Website
-This is a simulated e-commerce website. It showcases product data and lets users browse and search for items. Users can add products to their shopping cart, modify the selections, and remove unwanted items. 
+This is a simulated e-commerce website. It showcases product data (fetched from dummy product api) and lets users browse and search for items. Users can add products to their shopping cart, modify the selections, and remove unwanted items. 
 
 # Cloning and Setting Up a React Project Locally
 
