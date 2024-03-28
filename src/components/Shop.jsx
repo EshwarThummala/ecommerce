@@ -10,7 +10,7 @@ const Shop = ({ setShop }) => {
   const dispatch = useDispatch();
   const [ navState, setNavState ] = useState("SHOP");
   useEffect(() => {
-    getAllProducts("20", dispatch);
+    getAllProducts("24", dispatch);
   }, []);
   let content = null;
   switch (navState) {
