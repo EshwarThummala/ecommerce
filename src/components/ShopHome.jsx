@@ -14,7 +14,12 @@ const ShopHome = ({ dispatch }) => {
       <div
         class="alert alert-dark"
         role="alert"
-        style={{ textAlign: "center", margin: "20px 0px 0px 400px", padding: "10px", width:"50%" }}
+        style={{
+          textAlign: "center",
+          margin: "20px 0px 0px 400px",
+          padding: "10px",
+          width: "50%",
+        }}
       >
         Shop till you drop, then shop some more.
       </div>
@@ -27,15 +32,21 @@ const ShopHome = ({ dispatch }) => {
           ))
         ) : searchResults.length === 0 ? (
           <div
-          className="alert alert-light"
-          role="alert"
-          style={{ textAlign: "center", marginTop: "100px" }}
-        >
-          Opps, No search results for the product : {searchItem}
-        </div>
+            className="alert alert-light"
+            role="alert"
+            style={{ textAlign: "center", marginTop: "100px" }}
+          >
+            Opps, No search results for the product : {searchItem}
+          </div>
         ) : (
           <>
-            <h1>{searchResults.length} Results</h1>
+            <div
+              className="alert alert-info"
+              role="alert"
+              style={{ textAlign: "center" }}
+            >
+              {searchResults.length} results found
+            </div>
             {searchResults.map((product) => (
               <Col lg={2} md={8} xs={12} style={{ marginTop: 20 }}>
                 <Product

@@ -47,7 +47,9 @@ const ProductModal = ({ showModal, setShowModal, product }) => {
                   </Col>
                   <Col>
                     <b>Rating : </b>
-                    <span style={{marginRight: "10px"}}>{product.rating}</span>
+                    <span style={{ marginRight: "10px" }}>
+                      {product.rating}
+                    </span>
                     {Array(Math.round(product.rating))
                       .fill()
                       .map(() => (
@@ -75,9 +77,10 @@ const ProductModal = ({ showModal, setShowModal, product }) => {
                 <Row>
                   <Col lg={6}>
                     <b>Price : $</b>
-                    {product.price -
-                      product.price *
-                        (product.discountPercentage / 100).toFixed(1)}
+                    {(
+                      product.price -
+                      product.price * (product.discountPercentage / 100)
+                    ).toFixed(1)}
                   </Col>
                   <Col>
                     <b>Stock : </b>
