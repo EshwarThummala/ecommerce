@@ -63,7 +63,14 @@ const Cart = ({ dispatch }) => {
                               {item.quantity}
                             </MDBBadge>
                           </Col>
-                          <Col lg={3}>${item.price * item.quantity}</Col>
+                          <Col lg={3}>
+                            $
+                            {(
+                              (item.price -
+                                item.price * (item.discountPercentage / 100)) *
+                              item.quantity
+                            ).toFixed(1)}
+                          </Col>
                         </Row>
                       </MDBListGroupItem>
                     );
@@ -92,7 +99,11 @@ const Cart = ({ dispatch }) => {
         </MDBModalDialog>
       </MDBModal>
       {isEmpty ? (
-        <div className="alert alert-light" role="alert" style={{ textAlign: 'center' }}>
+        <div
+          className="alert alert-light"
+          role="alert"
+          style={{ textAlign: "center" }}
+        >
           No items in the cart
         </div>
       ) : (
@@ -133,22 +144,6 @@ const Cart = ({ dispatch }) => {
                           >
                             <MDBBadge pill light style={{ cursor: "pointer" }}>
                               <i
-                                className="fa-solid fa-plus"
-                                onClick={() =>
-                                  dispatch(
-                                    updateQuantityAction(
-                                      item.id,
-                                      item.quantity === item.stock
-                                        ? item.quantity
-                                        : item.quantity + 1
-                                    )
-                                  )
-                                }
-                              />
-                            </MDBBadge>
-                            <p style={{ margin: "7px" }}>{item.quantity}</p>
-                            <MDBBadge pill light style={{ cursor: "pointer" }}>
-                              <i
                                 className="fa-solid fa-minus"
                                 onClick={() =>
                                   dispatch(
@@ -157,6 +152,22 @@ const Cart = ({ dispatch }) => {
                                       item.quantity === 1
                                         ? 1
                                         : item.quantity - 1
+                                    )
+                                  )
+                                }
+                              />
+                            </MDBBadge>
+                            <p style={{ margin: "7px" }}>{item.quantity}</p>
+                            <MDBBadge pill light style={{ cursor: "pointer" }}>
+                              <i
+                                className="fa-solid fa-plus"
+                                onClick={() =>
+                                  dispatch(
+                                    updateQuantityAction(
+                                      item.id,
+                                      item.quantity === item.stock
+                                        ? item.quantity
+                                        : item.quantity + 1
                                     )
                                   )
                                 }
