@@ -6,7 +6,6 @@ import Cart from "./Cart";
 import ShopHome from "./ShopHome";
 import Categories from "./Categories";
 
-
 const Shop = ({ setShop }) => {
   const dispatch = useDispatch();
   const [ navState, setNavState ] = useState("SHOP");
@@ -29,7 +28,7 @@ const Shop = ({ setShop }) => {
   }
   return (
     <Navigation setShop={setShop} setNavState={setNavState} navState={navState} dispatch={dispatch}>
-      <div style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 70 }}>
+      <div style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 70}}>
         {content}
       </div>
     </Navigation>

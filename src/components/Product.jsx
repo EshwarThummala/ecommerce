@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import ProductModal from "./ProductModal";
+import "../css/Product.css";
 
 const Product = ({ product, dispatch }) => {
   const [showModal, setShowModal] = useState(false);
@@ -48,7 +49,9 @@ const Product = ({ product, dispatch }) => {
           rippleTag="div"
           className="bg-image hover-overlay"
         >
-          <MDBCardImage src={product.thumbnail} fluid alt="..." />
+          <div className="cropped-image-container">
+            <MDBCardImage src={product.thumbnail} fluid alt="..." />
+          </div>
           <a>
             <div
               className="mask"
@@ -77,15 +80,19 @@ const Product = ({ product, dispatch }) => {
               </MDBCardTitle>
             </div>
           )}
-          <MDBCardTitle>{product?.title}</MDBCardTitle>
-          <MDBCardText>{product?.description}</MDBCardText>
+          <div style={{ height: "150px", width: "100%" }}>
+            <MDBCardTitle>{product?.title}</MDBCardTitle>
+            <MDBCardText className="description">
+              {product?.description}
+            </MDBCardText>
+          </div>
           <MDBBtn onClick={() => setShowModal(true)} color="info">
             MORE DETAILS
           </MDBBtn>
         </MDBCardBody>
         <MDBCardFooter>
           {inCart.length === 0 ? (
-            <MDBBtn onClick={handleAddToCart} style={{ width: "100%" }}>
+            <MDBBtn onClick={handleAddToCart} block>
               <i
                 className="fa-solid fa-cart-shopping"
                 style={{ marginRight: "5px" }}
@@ -93,11 +100,7 @@ const Product = ({ product, dispatch }) => {
               ADD TO CART
             </MDBBtn>
           ) : (
-            <MDBBtn
-              onClick={handleRemoveFromCart}
-              color="danger"
-              style={{ width: "100%" }}
-            >
+            <MDBBtn onClick={handleRemoveFromCart} color="danger" block>
               REMOVE FROM CART
             </MDBBtn>
           )}
