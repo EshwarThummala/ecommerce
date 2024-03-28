@@ -63,7 +63,7 @@ const Cart = ({ dispatch }) => {
                               {item.quantity}
                             </MDBBadge>
                           </Col>
-                          <Col lg={3}>{item.price * item.quantity}</Col>
+                          <Col lg={3}>${item.price * item.quantity}</Col>
                         </Row>
                       </MDBListGroupItem>
                     );
@@ -81,7 +81,7 @@ const Cart = ({ dispatch }) => {
                 className="ms-2"
                 onClick={() => {
                   toggleOpen();
-                  dispatch(emptyCartAction())
+                  dispatch(emptyCartAction());
                 }}
               >
                 Ok, thanks
@@ -126,19 +126,49 @@ const Cart = ({ dispatch }) => {
                           <span>{item.title}</span>
                         </Col>
                         <Col lg={3}>
-                          <MDBInputGroup className="mb-3" size="sm">
-                            <input
-                              className="form-control"
-                              type="number"
-                              value={item.quantity}
-                              min="1"
-                              onChange={(e) =>
-                                dispatch(
-                                  updateQuantityAction(item.id, e.target.value)
-                                )
-                              }
-                            />
-                          </MDBInputGroup>
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                          >
+                            <MDBBadge
+                              pill
+                              light
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i
+                                className="fa-solid fa-plus"
+                                onClick={() =>
+                                  dispatch(
+                                    updateQuantityAction(
+                                      item.id,
+                                      item.quantity === item.stock
+                                        ? item.quantity
+                                        : item.quantity + 1
+                                    )
+                                  )
+                                }
+                              />
+                            </MDBBadge>
+                            <p style={{ margin: "7px" }}>{item.quantity}</p>
+                            <MDBBadge
+                              pill
+                              light
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i
+                                className="fa-solid fa-minus"
+                                onClick={() =>
+                                  dispatch(
+                                    updateQuantityAction(
+                                      item.id,
+                                      item.quantity === 1
+                                        ? 1
+                                        : item.quantity - 1
+                                    )
+                                  )
+                                }
+                              />
+                            </MDBBadge>
+                          </div>
                         </Col>
                         <Col lg={2}>
                           <span style={{ color: "#db5c5c" }}>

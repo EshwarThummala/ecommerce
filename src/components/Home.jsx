@@ -1,9 +1,48 @@
+import { MDBBtn } from "mdb-react-ui-kit";
 
 const Home = ({ setShop }) => {
-   return <>
-    <h1>In Home Page</h1>
-    <button onClick={() => setShop(true)}>Go to Shop</button>
-   </>
-}
+  return (
+    <>
+      <div
+        id="intro"
+        className="bg-image vh-100 shadow-1-strong"
+        style={{ position: "relative" }}
+      >
+        <video
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+          autoPlay
+          muted
+          loop
+        >
+          <source
+            src="https://mdbootstrap.com/img/video/Lines.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div
+          class="mask"
+          style={{
+            background:
+              "linear-gradient(45deg, rgba(29, 236, 197, 0.7), rgba(91, 14, 214, 0.7) 100%)",
+          }}
+        >
+          <div className="container d-flex align-items-center justify-content-center text-center h-100">
+            <div className="text-white" data-mdb-theme="dark">
+              <h1 className="mb-3">Welcome to shopping center</h1>
+              <MDBBtn outline className="mx-2" style={{color: "white"}} color="secondary" onClick={() => setShop(true)}>
+                Go TO SHOP
+              </MDBBtn>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default Home;

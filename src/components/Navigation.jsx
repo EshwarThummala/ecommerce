@@ -66,6 +66,7 @@ const Navigation = ({ children, setShop, navState, setNavState, dispatch }) => {
                 placeholder="Search for product"
                 aria-label="Search"
                 type="Search"
+                value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
               />
               <MDBBtn
