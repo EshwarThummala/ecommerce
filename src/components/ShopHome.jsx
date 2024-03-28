@@ -8,12 +8,18 @@ const ShopHome = ({ dispatch }) => {
   const searchResults = useSelector(
     (state) => state.productStore.currentSearchItems
   );
-  console.log(searchItem)
+  console.log(searchItem);
   return (
     <>
-      <h3>Shop to your liking...</h3>
+      <div
+        class="alert alert-dark"
+        role="alert"
+        style={{ textAlign: "center", margin: "20px 0px 0px 400px", padding: "10px", width:"50%" }}
+      >
+        Shop till you drop, then shop some more.
+      </div>
       <Row style={{ marginTop: 10 }}>
-        {searchItem === '' ? (
+        {searchItem === "" ? (
           homeProducts.map((product) => (
             <Col lg={2} md={8} xs={12} style={{ marginTop: 20 }}>
               <Product key={product.id} product={product} dispatch={dispatch} />

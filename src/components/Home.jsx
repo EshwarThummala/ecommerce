@@ -34,6 +34,7 @@ const Home = ({ setShop }) => {
           <div className="container d-flex align-items-center justify-content-center text-center h-100">
             <div className="text-white" data-mdb-theme="dark">
               <h1 className="mb-3">Welcome to shopping center</h1>
+              <p>When in doubt, go shopping</p>
               <MDBBtn outline className="mx-2" style={{color: "white"}} color="secondary" onClick={() => setShop(true)}>
                 Go TO SHOP
               </MDBBtn>

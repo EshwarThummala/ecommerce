@@ -12,9 +12,21 @@ const Category = ({ category, dispatch }) => {
     getProductByCategory(category, dispatch);
   }
   return !category ? (
-    <h1> Choose a category </h1>
+    <div
+      className="alert alert-light"
+      role="alert"
+      style={{ textAlign: "center" }}
+    >
+      Explore our curated categories and discover your next obsession.
+    </div>
   ) : !categoryItems ? (
-    <h1>No items in this Category</h1>
+    <div
+      className="alert alert-light"
+      role="alert"
+      style={{ textAlign: "center" }}
+    >
+      Looks like this category is empty.
+    </div>
   ) : (
     <Row style={{ marginTop: 10 }}>
       {categoryItems.map((product) => (

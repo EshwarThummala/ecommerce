@@ -92,7 +92,9 @@ const Cart = ({ dispatch }) => {
         </MDBModalDialog>
       </MDBModal>
       {isEmpty ? (
-        <h1>Empty Cart!! Go and shop something...</h1>
+        <div className="alert alert-light" role="alert" style={{ textAlign: 'center' }}>
+          No items in the cart
+        </div>
       ) : (
         <Row>
           <Col lg={8}>
@@ -129,11 +131,7 @@ const Cart = ({ dispatch }) => {
                           <div
                             style={{ display: "flex", alignItems: "center" }}
                           >
-                            <MDBBadge
-                              pill
-                              light
-                              style={{ cursor: "pointer" }}
-                            >
+                            <MDBBadge pill light style={{ cursor: "pointer" }}>
                               <i
                                 className="fa-solid fa-plus"
                                 onClick={() =>
@@ -149,11 +147,7 @@ const Cart = ({ dispatch }) => {
                               />
                             </MDBBadge>
                             <p style={{ margin: "7px" }}>{item.quantity}</p>
-                            <MDBBadge
-                              pill
-                              light
-                              style={{ cursor: "pointer" }}
-                            >
+                            <MDBBadge pill light style={{ cursor: "pointer" }}>
                               <i
                                 className="fa-solid fa-minus"
                                 onClick={() =>
